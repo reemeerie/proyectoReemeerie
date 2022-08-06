@@ -1,4 +1,5 @@
 import React from "react"
+import CartWidget from "./CartWidget"
 import "../style/NavBar.css"
 
 
@@ -33,8 +34,7 @@ const NavBar = () => {
                         </li>
                     </ul>
                     <div className="d-flex align-items-center justify-content-center padreLinks">
-                        <i className="fa-solid fa-cart-shopping text-dark icon fa-lg"></i>
-                        <a href="#" className="links">Carrito</a>
+                        <CartWidget />
                         <i className="fa-solid fa-user text-dark icon fa-lg"></i>
                         <a href="#" className="links">Log in</a>
                     </div>
