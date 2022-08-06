@@ -1,0 +1,19 @@
+.icon {
+    margin: 5px;
+    padding: 0px 10px 0px 20px;
+    cursor: pointer;
+    font-size: 28px;
+}
+
+.links {
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.links:visited {
+    color: black;
+}
+
+.padreLinks {
+    padding-right: 10px;
+}
