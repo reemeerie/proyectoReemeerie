@@ -16,15 +16,8 @@ const NavBar = () => {
                         <li className="nav-item">
                             <a className="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Productos
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Hombre</a></li>
-                                <li><a class="dropdown-item" href="#">Mujer</a></li>
-                                <li><a class="dropdown-item" href="#">Niños</a></li>
-                            </ul>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Productos</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">Marcas</a>

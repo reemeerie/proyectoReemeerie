@@ -1,12 +1,15 @@
-import React from "react";
-import ItemCount from "./ItemCount";
+import React from "react"
+import ItemList from "./ItemList"
+import Contador from "./Contador"
+import "../style/ItemListContainer.css"
 
-const ItemListContainer = (props) => {
-    return (
-        <div>
-            <h1>{props.texto}</h1>
-            <ItemCount stock={15}/>
-        </div>
+const ItemListContainer = () => {
+    return (<>
+            <div className="container customContainer">
+                <ItemList/>
+                <Contador stock={15} inicial={1}/>
+            </div>
+        </>
     )
 };
 
