@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import * as FaIcons from 'react-icons/fa'
 
 const CartWidget = () => {
     return (
-    <>
-        <i className="fa-solid fa-cart-shopping text-dark icon fa-lg"></i>
-        <a href="#" className="links">Carrito</a>
-    </>
+        <Link to='/cart' className='contenedorChico'>
+            <FaIcons.FaShoppingCart className='icono'/>Cart
+        </Link>
     )
 };
 

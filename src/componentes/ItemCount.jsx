@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import img from "../img/filaStyling.jpg"
-import "../style/Contador.css"
+import "../style/ItemCount.css"
 
-const Contador = ({ stock, inicial }) => {
+const ItemCount = ({ stock, inicial }) => {
     const [cant, setCant] = useState(inicial)
 
     //La funcion onAdd opté por hacerla en el mismo componente
@@ -35,4 +35,4 @@ const Contador = ({ stock, inicial }) => {
     )}
 }
 
-export default Contador;
+export default ItemCount;

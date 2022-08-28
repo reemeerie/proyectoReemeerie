@@ -1,10 +1,9 @@
 import React from 'react'
-import "../style/Card.css"
 import { Link } from 'react-router-dom'
 
-const Card = (props) => {
+const ItemDetail = (props) => {
   return (
-                <div className="col-xxl-2 customCont col-lg-3 col-md-5" >
+    <div className="col-xxl-2 customCont col-lg-3 col-md-5" >
                     <div className="row">
                         <div className="">
                             <div className="card-sl">
@@ -18,7 +17,7 @@ const Card = (props) => {
                                 <div className="card-text">
                                     {props.precio}
                                 </div>
-                                <Link to={`/item/${props.id}`} className="card-button">
+                                <Link to='/' className="card-button">
                                     Añadir al carro
                                 </Link>
                             </div>
@@ -28,4 +27,4 @@ const Card = (props) => {
   )
 }
 
-export default Card;
+export default ItemDetail
