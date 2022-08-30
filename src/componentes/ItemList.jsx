@@ -2,13 +2,14 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import zapatillas from "../zapatillas.json"
-import Card from './Card'
+import Item from './Item'
 import "../style/ItemList.css"
 
 const ItemList = () => {
     const [zapas, setZapas] = useState([])
 
     useEffect(() => {
+        
         const conexion = new Promise ((resolve, reject) => {
             setTimeout(() => {
                 resolve(zapatillas)
@@ -24,7 +25,7 @@ const ItemList = () => {
     {zapas.length < 1 ? <div className="spinner-border text-warning spinner" role="status">
   <span className="visually-hidden">Loading...</span>
 </div>
-    :zapas.map((zapa)=><Card img={zapa.img} nombre={zapa.nombre} precio={zapa.precio} id={zapa.id}/>)}
+    :zapas.map((zapa)=><Item img={zapa.img} nombre={zapa.nombre} precio={zapa.precio} id={zapa.id}/>)}
         </>)
 }
 

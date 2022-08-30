@@ -9,18 +9,20 @@ const ItemDetailContainer = () => {
     const [zapatilla, setZapatilla] = useState({})
 
     useEffect(() => {
-        const conexion = new Promise ((resolve, reject) => {
+        const conexion = new Promise ((resolve) => {
             setTimeout(() => {
-                resolve(zapatillas.find((zapa)=> zapa.id == id))
+                resolve(zapatillas.find((zapa)=> zapa.id === id))
             }, 2000)
         })
         conexion.then((data)=> setZapatilla(data))
-
+        .catch((err) => console.log(err))
+        .finally(()=>console.log("fin promesa"))
     }, [id])
+
   return ( <>
-        {zapatilla.length < 1 ? <div className="spinner-border text-warning spinner" role="status">
-        <span className="visually-hidden">Loading...</span>
-    </div>: <ItemDetail nombre={zapatilla.nombre} precio={zapatilla.precio} img={zapatilla.img}/>}
+        {Object.keys(zapatilla).length == 0  ? <div className="spinner-border text-warning spinner" role="status">
+        <span className="visually-hidden">Loading...</span></div>
+        : <ItemDetail nombre={zapatilla.nombre} precio={zapatilla.precio} img={zapatilla.img}/>}
   </>
   )
 }

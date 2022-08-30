@@ -2,7 +2,7 @@ import React from 'react'
 import "../style/Card.css"
 import { Link } from 'react-router-dom'
 
-const Card = (props) => {
+const Item = (props) => {
   return (
                 <div className="col-xxl-2 customCont col-lg-3 col-md-5" >
                     <div className="row">
@@ -28,4 +28,4 @@ const Card = (props) => {
   )
 }
 
-export default Card;
+export default Item;

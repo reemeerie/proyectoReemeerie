@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import "../style/Card.css"
 
 const ItemDetail = (props) => {
   return (
@@ -9,7 +10,7 @@ const ItemDetail = (props) => {
                             <div className="card-sl">
                                 <div className="card-image">
                                     <img
-                                    src={props.img} alt='nashuy'/>
+                                    src={props.img} alt='imagen'/>
                                 </div>
                                 <div className="card-heading">
                                     {props.nombre}
