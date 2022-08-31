@@ -4,7 +4,7 @@ import "../style/Card.css"
 
 const ItemDetail = (props) => {
   return (
-    <div className="col-xxl-2 customCont col-lg-3 col-md-5" >
+                <div className="col-xxl-2 customCont col-lg-3 col-md-5" >
                     <div className="row">
                         <div className="">
                             <div className="card-sl">
