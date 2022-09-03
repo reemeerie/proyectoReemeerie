@@ -21,9 +21,9 @@ const ItemDetailContainer = () => {
     }, [id])
 
   return ( <>
-        {Object.keys(zapatilla).length == 0  ?<div className="container customContainer"> <div className="spinner-border text-warning spinner" role="status">
+        {Object.keys(zapatilla).length === 0  ?<div className="container customContainer"> <div className="spinner-border text-warning spinner" role="status">
         <span className="visually-hidden">Loading...</span></div> </div>
-        : <div className="container customContainer"> <ItemDetail nombre={zapatilla.nombre} precio={zapatilla.precio} img={zapatilla.img}/> </div>}
+        : <div className="container customContainer"> <ItemDetail nombre={zapatilla.nombre} precio={zapatilla.precio} img={zapatilla.img} inicial={1} stock={zapatilla.stock} id={zapatilla.id}/> </div>}
   </>
   )
 }
