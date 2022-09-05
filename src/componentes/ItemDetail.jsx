@@ -6,10 +6,19 @@ import "../style/ItemCount.css"
 import { CartContext } from '../context/CartContext'
 
 const ItemDetail = (props) => {
-    const {addItem} = useContext(CartContext)
+    const {addItem, itemsCarrito, isInCart } = useContext(CartContext)
+    let cantEnCarro = 0
+
+    if(isInCart(props.id)){
+        let aux = itemsCarrito
+        let itemIndex = aux.findIndex((element)=> element.id === props.id)
+        cantEnCarro = aux[itemIndex].cantidad
+    }
+
     const [cant, setCant] = useState(props.inicial)
+
     function agregarUno() {
-        if (cant < props.stock) {
+        if (cant < props.stock && cantEnCarro + cant < props.stock) {
             return setCant(cant + 1)
         } else {return;}
     }
@@ -39,7 +48,7 @@ const ItemDetail = (props) => {
                                 <div className="card-text">
                                     {props.precio}
                                 </div>
-                                <div className="d-flex justify-content-center align-items-center">
+                                {cantEnCarro == props.stock ? 'Sin stock': <><div className="d-flex justify-content-center align-items-center">
                                     <button type="button" className="btn btn-warning" onClick={() => {restarUno()}}>-</button>
                                     <p className="numero">{cant}</p>
                                     <button type="button" className="btn btn-warning" onClick={() => {agregarUno()}}>+</button>
@@ -47,6 +56,7 @@ const ItemDetail = (props) => {
                                 <Link onClick={onAdd} to='/cart' className="card-button">
                                     Añadir al carrito
                                 </Link>
+                                </>}
                             </div>
                         </div>
                     </div>

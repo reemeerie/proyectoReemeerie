@@ -25,7 +25,7 @@ const ItemList = () => {
     {zapas.length < 1 ? <div className="spinner-border text-warning spinner" role="status">
   <span className="visually-hidden">Loading...</span>
 </div>
-    :zapas.map((zapa)=><Item img={zapa.img} nombre={zapa.nombre} precio={zapa.precio} id={zapa.id}/>)}
+    :zapas.map((zapa)=><Item img={zapa.img} nombre={zapa.nombre} precio={zapa.precio} id={zapa.id} precioNumero={zapa.precioNumero}/>)}
         </>)
 }
 

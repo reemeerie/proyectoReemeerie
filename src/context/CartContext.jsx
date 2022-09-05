@@ -13,8 +13,12 @@ export const CartProvider = ({children}) => {
         if(isInCart(item.id)){
             let aux = itemsCarrito
             let itemIndex = aux.findIndex((element)=> element.id === item.id)
-            aux[itemIndex].cantidad += cantidad
-            setItemsCarrito([...aux])
+            let antes = aux[itemIndex].cantidad
+            let cantAgregar = antes + cantidad
+            if (cantAgregar <= item.stock) {
+                aux[itemIndex].cantidad += cantidad
+                setItemsCarrito([...aux])
+            }
         } else {
             setItemsCarrito([...itemsCarrito, {...item, cantidad}])
         }
@@ -40,7 +44,8 @@ export const CartProvider = ({children}) => {
     <CartContext.Provider
     value={{
         addItem,
-        itemsCarrito
+        itemsCarrito,
+        isInCart
     }}>
     {children}
     </CartContext.Provider>
