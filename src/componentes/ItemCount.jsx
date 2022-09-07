@@ -5,7 +5,6 @@ import "../style/ItemCount.css"
 const ItemCount = ({ stock, inicial }) => {
     const [cant, setCant] = useState(inicial)
 
-    //La funcion onAdd opté por hacerla en el mismo componente
     function agregarUno() {
         if (cant < stock) {
             return setCant(cant + 1)

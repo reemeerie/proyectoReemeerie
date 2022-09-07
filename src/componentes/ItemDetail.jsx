@@ -48,7 +48,9 @@ const ItemDetail = (props) => {
                                 <div className="card-text">
                                     {props.precio}
                                 </div>
-                                {cantEnCarro == props.stock ? 'Sin stock': <><div className="d-flex justify-content-center align-items-center">
+                                {cantEnCarro == props.stock ? <p className="card-button-disabled">
+                                    Sin stock
+                                </p>: <><div className="d-flex justify-content-center align-items-center">
                                     <button type="button" className="btn btn-warning" onClick={() => {restarUno()}}>-</button>
                                     <p className="numero">{cant}</p>
                                     <button type="button" className="btn btn-warning" onClick={() => {agregarUno()}}>+</button>

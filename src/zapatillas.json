@@ -37,7 +37,7 @@
     },
     {
         "id":"5",
-        "nombre":"Pharrel Williams HU",
+        "nombre":"Pharrell Williams HU",
         "marca":"Adidas",
         "img":"http://localhost:3000/img/pwhu.jpg",
         "precio":"$30.000",
@@ -82,7 +82,7 @@
     },
     {
         "id":"10",
-        "nombre":"Ozelle Cloudfam",
+        "nombre":"Ozelle Cloudfoam",
         "marca":"Adidas",
         "img":"http://localhost:3000/img/ozelle.webp",
         "precio":"$22.999",
