@@ -1,18 +1,19 @@
-import React from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import zapatillas from "../zapatillas.json"
-import Item from './Item'
-import "../style/ItemList.css"
+import React from "react"
+import ItemList from "./ItemList"
+import "../style/ItemListContainer.css"
 import  db  from "../services"
 import { collection, getDocs } from 'firebase/firestore'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
-const ItemList = () => {
+const ItemListContainer = () => {
+
     const [zapas, setZapas] = useState([])
 
     useEffect(() => {
         /* CONEXION A GOOGLE FIREBASE */
         const getColData = async () => {
+            
             try {
                 const data = collection(db, "zapatillas")
                 const col = await getDocs(data)
@@ -21,9 +22,10 @@ const ItemList = () => {
                 setZapas(res)
             }
             catch (error) {
-                console.log(error)
+                console.log("pija anal")
             }
         }
+
         getColData()
         
         /* MOCK PROMESA */
@@ -39,13 +41,20 @@ const ItemList = () => {
         .finally(()=>console.log("fin promesa")) */
     }, [])
 
-    return ( <> 
-                {zapas.length < 1 ? <div className="spinner-border text-warning spinner" role="status">
+
+
+    return (
+    <>
+        {zapas.length < 1 ?     <div className="container customContainer">
+                                    <div className="spinner-border text-warning spinner" role="status">
                                         <span className="visually-hidden">Loading...</span>
                                     </div>
-                                    :zapas.map((zapa)=><Item img={zapa.img} nombre={zapa.nombre} precio={zapa.precio} id={zapa.id} precioNumero={zapa.precioNumero}/>
-                                    )}
-            </>)
+                                </div>
+                            :   <div className="container customContainer">
+                                    <ItemList zapas={zapas}/>
+                                </div>}
+    </>
+    )
 }
 
-export default ItemList;
+export default ItemListContainer;

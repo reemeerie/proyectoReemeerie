@@ -1,5 +1,6 @@
-.spinner{
-    margin-top: 50px;
-    height: 50px;
-    width: 50px;
+.customContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
