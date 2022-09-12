@@ -1,9 +1,14 @@
 import React, { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
 import "../style/Cart.css"
+import { Link } from 'react-router-dom'
 
 const Cart = () => {
-    const { itemsCarrito, removeItem } = useContext(CartContext)
+    const { itemsCarrito, removeItem, addTotal } = useContext(CartContext)
+
+    const mandoAcontext = (acum) => {
+      addTotal(acum)
+    }
 
     let acumulador = 0
 
@@ -35,9 +40,9 @@ const Cart = () => {
                                               <p className='nombre'>Total</p>
                                               <p className='precio'>{`$${acumulador}`}</p>
                                             </div>
-                                            <div className="card-button">
+                                            <Link onClick={() => mandoAcontext(acumulador)} to='/cart/form' className="card-button">
                                               Terminar mi compra
-                                            </div>
+                                            </Link>
                                           </div>
                                           </div>}
    
