@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import zapatillas from "../zapatillas.json"
 import ItemDetail from './ItemDetail'
 import "../style/ItemListContainer.css"
 import db from '../services'
@@ -18,23 +17,15 @@ const ItemDetailContainer = () => {
                 const q = query(collection(db, "zapatillas"), where("id", "==", id))
                 const col = await getDocs(q)
                 const res = col.docs.map((doc)=> doc.data())
-                console.log(...res)
                 setZapatilla(...res)
             }
             catch (error) {
                 console.log(error)
             }
         }
+        
         getColData()
 
-
-        /* const conexion = new Promise ((resolve) => {
-            setTimeout(() => {
-                resolve(zapatillas.find((zapa)=> zapa.id === id))
-            }, 2000)
-        })
-        conexion.then((data)=> setZapatilla(data))
-        .catch((err) => console.log(err)) */
     }, [id])
 
   return ( <>

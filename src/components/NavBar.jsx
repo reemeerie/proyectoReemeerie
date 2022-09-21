@@ -12,6 +12,7 @@ const NavBar = () => {
 
     const showSidebar = () => {setSidebar(!sidebar)}
 
+
     return (
         <>
         <IconContext.Provider value={{color: 'black'}}>

@@ -37,8 +37,8 @@ const Cart = () => {
             {itemsCarrito.length >= 1 && <div className='elPadre'>
                                           <div className='contenedor col-xxl-10'>
                                             <div className='nombrePrecio'>
-                                              <p className='nombre'>Total</p>
-                                              <p className='precio'>{`$${acumulador}`}</p>
+                                              <p className='nombre mt-3'>Total</p>
+                                              <p className='precio mt-3'>{`$${acumulador}`}</p>
                                             </div>
                                             <Link onClick={() => mandoAcontext(acumulador)} to='/cart/form' className="card-button">
                                               Terminar mi compra

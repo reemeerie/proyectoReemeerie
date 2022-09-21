@@ -12,7 +12,7 @@ const Item = (props) => {
                                 <div className="card-image">
                                     <Link to={`/item/${props.id}`}>
                                         <img
-                                        src={props.img} alt='nashuy'/>
+                                        src={props.img} alt='img'/>
                                     </Link>
                                 </div>
                                 <div className="card-heading">

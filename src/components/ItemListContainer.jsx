@@ -11,34 +11,22 @@ const ItemListContainer = () => {
     const [zapas, setZapas] = useState([])
 
     useEffect(() => {
-        /* CONEXION A GOOGLE FIREBASE */
+
         const getColData = async () => {
             
             try {
                 const data = collection(db, "zapatillas")
                 const col = await getDocs(data)
                 const res = col.docs.map((doc)=> doc.data())
-                console.log(res)
                 setZapas(res)
             }
             catch (error) {
-                console.log("pija anal")
+                console.log(error)
             }
         }
 
         getColData()
         
-        /* MOCK PROMESA */
-
-        /* const conexion = new Promise ((resolve, reject) => {
-            setTimeout(() => {
-                resolve(zapatillas)
-            }, 1500);
-        })
-
-        conexion.then(res => setZapas(res))
-        .catch((err) => console.log(err))
-        .finally(()=>console.log("fin promesa")) */
     }, [])
 
 

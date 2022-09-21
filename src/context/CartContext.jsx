@@ -10,7 +10,6 @@ export const CartProvider = ({children}) => {
     const [total, setTotal] = useState(0)
 
     const addItem = (item, cantidad) => {
-        console.log({...item, cantidad})
         if(isInCart(item.id)){
             let aux = itemsCarrito
             let itemIndex = aux.findIndex((element)=> element.id === item.id)
@@ -37,6 +36,10 @@ export const CartProvider = ({children}) => {
         setTotal(acum)
     }
 
+    const clearCarro = () => {
+        setItemsCarrito([])
+    }
+
 
   return (
     <CartContext.Provider
@@ -46,7 +49,8 @@ export const CartProvider = ({children}) => {
         addItem,
         isInCart,
         removeItem,
-        addTotal
+        addTotal,
+        clearCarro
     }}>
     {children}
     </CartContext.Provider>
