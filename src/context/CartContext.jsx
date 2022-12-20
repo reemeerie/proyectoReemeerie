@@ -25,7 +25,7 @@ export const CartProvider = ({children}) => {
     }
 
     const removeItem = (ItemId) => {
-        setItemsCarrito(itemsCarrito.filter((element)=> element.id != ItemId))
+        setItemsCarrito(itemsCarrito.filter((element)=> element.id !== ItemId))
     }
 
     const isInCart = (ItemId) => {
@@ -40,6 +40,14 @@ export const CartProvider = ({children}) => {
         setItemsCarrito([])
     }
 
+    const fromLocalStorage = () => {
+        const localCarrito = window.localStorage.getItem('cart')
+        if (localCarrito) {
+            const newCarro = JSON.parse(localCarrito)
+            setItemsCarrito(newCarro)
+            window.localStorage.removeItem('cart')
+        }
+    }
 
   return (
     <CartContext.Provider
@@ -50,7 +58,8 @@ export const CartProvider = ({children}) => {
         isInCart,
         removeItem,
         addTotal,
-        clearCarro
+        clearCarro,
+        fromLocalStorage
     }}>
     {children}
     </CartContext.Provider>

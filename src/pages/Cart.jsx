@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
 import "../style/Cart.css"
 import { Link } from 'react-router-dom'
+import { Button } from '@mui/material'
 
 const Cart = () => {
     const { itemsCarrito, removeItem, addTotal } = useContext(CartContext)
@@ -18,7 +19,7 @@ const Cart = () => {
     }
 
   return (<>
-            {itemsCarrito.length < 1 && <h3 className='sinItems'>Tu carrito esta vacío :(</h3>}
+            {itemsCarrito.length < 1 && <h3 className='sinItems'>Cart empty :C, try visiting the <Link to='/products' className='link'><strong>products section.</strong></Link></h3>}
             {itemsCarrito.length >= 1 && <div>
             {itemsCarrito.map((item,index)=> <div key={index} className='elPadre'>
                                               <div className='contenedor col-xxl-10'>
@@ -34,17 +35,17 @@ const Cart = () => {
                                                 </div>
                                               </div>
                                             </div>  )} </div>}
-            {itemsCarrito.length >= 1 && <div className='elPadre'>
-                                          <div className='contenedor col-xxl-10'>
-                                            <div className='nombrePrecio'>
-                                              <p className='nombre mt-3'>Total</p>
-                                              <p className='precio mt-3'>{`$${acumulador}`}</p>
+            {itemsCarrito.length >= 1 && <>
+                                            <div className="contenedorFinalizar">
+                                              <div className='nombrePrecioTotal'>
+                                                <p className='mt-3'>Total - {`$${acumulador}`}</p>
+                                                <Link to='/cart/form' className='link'>
+                                                  <Button variant='contained' color='secondary' onClick={() => mandoAcontext(acumulador)}>Finalizar mi compra</Button>
+                                                </Link>
+                                              </div>
                                             </div>
-                                            <Link onClick={() => mandoAcontext(acumulador)} to='/cart/form' className="card-button">
-                                              Terminar mi compra
-                                            </Link>
-                                          </div>
-                                          </div>}
+                                          
+                                          </>}
    
 
           </>

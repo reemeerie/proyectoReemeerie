@@ -1,11 +1,11 @@
 import React from 'react'
-import "../style/Card.css"
+import "../style/Item.css"
 import { Link } from 'react-router-dom'
 
 const Item = (props) => {
   return (
             
-                <div className="col-xxl-2 customCont col-lg-3 col-md-5" >
+                <div className="col-xxl-2 customCont col-lg-3 col-md-5 col-sm-5 col-10" >
                     <div className="row">
                         <div>
                             <div className="card-sl">

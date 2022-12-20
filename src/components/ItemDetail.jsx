@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import "../style/Card.css"
+import "../style/Item.css"
 import { useState, useContext } from 'react'
 import "../style/ItemCount.css"
 import { CartContext } from '../context/CartContext'
+import { Button } from '@mui/material'
 
 const ItemDetail = (props) => {
     const {addItem, itemsCarrito, isInCart } = useContext(CartContext)
@@ -31,7 +32,6 @@ const ItemDetail = (props) => {
         addItem(props, cant)
     }
 
-
     if (props.stock !== 0) {
   return (
                 <div className="col-xxl-5 customCont col-lg-8 col-md-10 col-xl-6" >
@@ -48,14 +48,14 @@ const ItemDetail = (props) => {
                                 <div className="card-text">
                                     {props.precio}
                                 </div>
-                                {cantEnCarro == props.stock ? <p className="card-button-disabled">
+                                {cantEnCarro === Number(props.stock) ? <p className="card-button-disabled">
                                     Sin stock
                                 </p>: <><div className="d-flex justify-content-center align-items-center">
-                                    <button type="button" className="btn btn-warning" onClick={() => {restarUno()}}>-</button>
+                                    <Button variant='outlined' color='primary' onClick={() => {restarUno()}}>-</Button>
                                     <p className="numero">{cant}</p>
-                                    <button type="button" className="btn btn-warning" onClick={() => {agregarUno()}}>+</button>
+                                    <Button variant='outlined' color='primary' onClick={() => {agregarUno()}}>+</Button>
                                 </div>
-                                <Link onClick={onAdd} to='/cart' className="card-button">
+                                <Link onClick={onAdd} to='/cart' className='card-button'>
                                     Añadir al carrito
                                 </Link>
                                 </>}

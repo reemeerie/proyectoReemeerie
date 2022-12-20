@@ -9,8 +9,9 @@
 
 .menu-bars {
     margin-left: 2rem;
-    font-size: 2rem;
+    font-size: 23px;
     background: none ;
+    cursor: pointer;
 }
 
 .nav-menu {
@@ -24,6 +25,7 @@
     left: -100%;
     transition: 850ms;
     z-index: 1;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .nav-menu.active{
@@ -37,6 +39,7 @@
     padding: 8px 50px 8px 0px;
     list-style: none;
     height: 60px;
+    
 }
 .nav-text a {
     text-decoration: none;
@@ -48,6 +51,7 @@
     align-items:center;
     padding:0 16px;
     border-radius: 4px;
+    
 }
 .nav-text a:hover {
     background-color: #a98807;
@@ -64,10 +68,12 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    
 }
 
-span {
+.sideSpan {
     margin-left: 16px;
+    font-family: PoppinsRegular; 
 }
 
 .contenedorGrande {
@@ -90,14 +96,11 @@ span {
 .contenedorChico:hover{
     color: black;
 }
-.icono{
-    margin-right: 10px;
-}
 .brand{
     text-decoration: none;
     color: black;
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 400;
     margin-left: 30px;
 }
 .brand:hover{
@@ -122,7 +125,7 @@ span {
 }
 @media (max-width: 375px) {
     .brand {
-        font-size: 21px;
+        font-size: 23px;
     }
 }
 

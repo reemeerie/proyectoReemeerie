@@ -3,29 +3,21 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ItemDetail from './ItemDetail'
 import "../style/ItemListContainer.css"
-import db from '../services'
-import { getDocs, collection, where, query } from 'firebase/firestore'
+import axios from 'axios'
 
 const ItemDetailContainer = () => {
     const {id} = useParams()
     const [zapatilla, setZapatilla] = useState({})
 
     useEffect(() => {
-
-        const getColData = async () => {
-            try {
-                const q = query(collection(db, "zapatillas"), where("id", "==", id))
-                const col = await getDocs(q)
-                const res = col.docs.map((doc)=> doc.data())
-                setZapatilla(...res)
-            }
-            catch (error) {
-                console.log(error)
-            }
+        const getAllZapasAndFilter = async () => {
+            const response = await axios.get('http://localhost:4500/api/v1/zapatillas/')
+            const zapatillas = response.data.data
+            const zapa = zapatillas.find((zapa)=> zapa.id === Number(id))
+            setZapatilla(zapa)
         }
-        
-        getColData()
 
+        getAllZapasAndFilter()
     }, [id])
 
   return ( <>

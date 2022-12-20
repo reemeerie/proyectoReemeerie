@@ -1,103 +1,188 @@
 import React from 'react'
 import "../style/Form.css"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { CartContext } from '../context/CartContext'
 import { useContext } from 'react'
-import { addDoc, collection } from 'firebase/firestore'
-import db from '../services'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { Formik } from 'formik'
 
 const Form = () => {
     const navigate = useNavigate()
-
+    const baseUrl = 'http://localhost:4500/api/v1/orders'
+    const [user, setUser] = useState('')
     const { total, itemsCarrito, clearCarro } = useContext(CartContext)
 
-    const [formulario, setFormulario] = useState({
-        buyer: {
-            nombre: '',
-            apellido:'',
-            email: '',
-            telefono: ''
-        },
-        total: total,
-        items: itemsCarrito
-    })
-
-    const { buyer: {nombre, apellido, email, telefono}} = formulario
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormulario({
-            ...formulario,
-            buyer: {
-                ...formulario.buyer,
-                [name]: value
-            }
-        })
-    }
-
-    const saveToFirebase = async (orden) => {
-        try {
-            if (!nombre || !apellido || !email || !telefono) {
-                return Swal.fire({
-                    title: 'Error',
-                    text: 'Completa todos los campos',
-                    icon: 'warning',
-                    confirmButtonText: 'Bueno',
-                    confirmButtonColor: '#ffc107',
-                    focusConfirm: 'false'
-                  })
-            }
-            setTimeout(() => navigate('/'), 3000)
-
-            const col = collection(db, "ordenes")
-
-            const generarOrden = await addDoc(col, orden)
-
-
-            clearCarro();
-
-            Swal.fire({
-                title: 'Listo!',
-                text: `Orden registrada con ID ${generarOrden.id}, muchas gracias por su compra`,
-                icon: 'success',
-                timer: 5000,
-                timerProgressBar: true,
-                showConfirmButton: false,
-            })
+    useEffect(() => {
+        const alreadyUser = window.localStorage.getItem('loggedUser')
+        if (alreadyUser && alreadyUser.length > 10){
+            const usuario = JSON.parse(alreadyUser)
+            setUser(usuario)
+        } else {
+            navigate('/login')
         }
-        catch (error) {
-            console.log(error)
-        }
-    }
+    },[navigate])
 
   return (
-        <div className='elPadre'>
-            <form action="" className='contenedor'>
-                <div className='container form'>
-                    <div className="form-floating mb-3 mt-3">
-                        <input value={nombre} name='nombre' type="text" onChange={handleChange} className="form-control" id="floatingNombre" placeholder="Nombre" required/>
-                        <label htmlFor="floatingInput">Nombre</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <input value={apellido} name='apellido' type="text" onChange={handleChange} className="form-control" id="floatingApellido" placeholder="Apellido"/>
-                        <label htmlFor="floatingInput">Apellido</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <input value={telefono} name='telefono' type="text" onChange={handleChange} className="form-control" id="floatingTelefono" placeholder="Telefono"/>
-                        <label htmlFor="floatingInput">Telefono</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <input value={email} name='email' type="email" onChange={handleChange} className="form-control" id="floatingInput" placeholder="name@example.com"/>
-                        <label htmlFor="floatingInput">Email address</label>
-                    </div>
-                </div>
-                <div onClick={() => saveToFirebase(formulario)} className="card-button">
-                    Terminar mi compra
-                </div>
-            </form>
+    <>
+        <div className='loginContainer'>
+            <div className="center">
+                <h1>Purchase details</h1>
+                <Formik
+                initialValues={{
+                    dni:'',
+                    provincia:'',
+                    ciudad:'',
+                    direccion:'',
+                    codigoPostal:'',
+                    telefono:''
+                }}
+                validate={(values)=> {
+                    let errors = {}
+                    if (!values.dni) {
+                        errors.dni = "Porfavor ingrese un dni"
+                    } else if(! /^([0-9])*$/.test(values.dni)) {
+                        errors.dni = "Porfavor ingrese un dni valido"
+                    }
+                    if(!values.provincia) {
+                        errors.provincia = "Porfavor ingrese una provincia"
+                    } else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.provincia)){
+                        errors.provincia = "Porfavor ingrese una provincia valida"
+                    }
+                    if(!values.ciudad) {
+                        errors.ciudad = "Porfavor ingrese una ciudad"
+                    } else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.ciudad)){
+                        errors.ciudad = "Porfavor ingrese una ciudad valida"
+                    }
+                    if(!values.telefono) {
+                        errors.telefono = "Porfavor ingrese su telefono"
+                    } else if(!/^([0-9])*$/.test(values.telefono)) {
+                        errors.telefono = "Porfavor ingrese un telefono valido"
+                    }
+                    if(!values.codigoPostal) {
+                        errors.codigoPostal = "Porfavor ingrese su codigo postal"
+                    } else if(!/^\d{4}/.test(values.codigoPostal)) {
+                        errors.codigoPostal = "Porfavor ingrese un codigo postal valido"
+                    }
+                    if(!values.direccion) {
+                        errors.direccion = "Porfavor ingrese una direccion para recibir el pedido   "
+                    }
+                    return errors
+                }}
+                onSubmit={async (values)=> { 
+                    try {
+                        const form = {
+                            buyer: {
+                                nombre: user.name,
+                                apellido: user.apellido,
+                                dni: values.dni,
+                                provincia: values.provincia,
+                                ciudad: values.ciudad,
+                                direccion: values.direccion,
+                                codigoPostal: values.codigoPostal,
+                                telefono: values.telefono
+                            },
+                            items: itemsCarrito,
+                            total: total
+                        }
+                        
+                        const config = {
+                            headers: {
+                                Authorization: `Bearer ${user.token}`
+                            }
+                        }
+                        const request = await axios.post(baseUrl, form, config)
+                    
+                        clearCarro()
+                    
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Gracias por su pedido!',
+                            text: `Orden de compra:  ${request.data.data.id}`,
+                            confirmButtonColor: '#ffc107',
+                        })
+
+                        navigate('/')
+                    } catch(error) {
+                        console.log(error)
+                    }      
+                }}>
+                    {({handleSubmit, values, handleChange, handleBlur, errors, touched}) => (
+                        <form action="" onSubmit={handleSubmit}>
+                        <div className="txt_field">
+                            <input name='dni'
+                            value={values.dni}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            type="text" 
+                            required/>
+                            <span></span>
+                            <label>Dni</label>
+                        </div>
+                        {touched.dni && errors.dni && <div className='error'>{errors.dni} </div>}
+                        <div className="txt_field">
+                            <input name='provincia'
+                            value={values.provincia}
+                            onChange={handleChange}
+                            onBlur={handleBlur} 
+                            type="text" 
+                            required/>
+                            <span></span>
+                            <label>Provincia</label>                          
+                        </div>
+                        {touched.provincia && errors.provincia && <div className='error'>{errors.provincia} </div>}
+                        <div className="txt_field">
+                            <input name='ciudad'
+                            value={values.ciudad}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            type="text" 
+                            required/>
+                            <span></span>
+                            <label>Ciudad</label>                            
+                        </div>
+                        {touched.ciudad && errors.ciudad && <div className='error'>{errors.ciudad} </div>}
+                        <div className="txt_field">
+                            <input name='direccion'
+                            value={values.direccion}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            type="text" 
+                            required/>
+                            <span></span>
+                            <label>Direccion</label>                           
+                        </div>
+                        {touched.direccion && errors.direccion && <div className='error'>{errors.direccion} </div>}
+                        <div className="txt_field">
+                            <input name='codigoPostal'
+                            value={values.codigoPostal}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            type="text" 
+                            required/>
+                            <span></span>
+                            <label>Codigo postal</label>                           
+                        </div>
+                        {touched.codigoPostal && errors.codigoPostal && <div className='error'>{errors.codigoPostal} </div>}
+                        <div className="txt_field">
+                            <input name='telefono'
+                            value={values.telefono} 
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            type="text"
+                            required/>
+                            <span></span>
+                            <label>Telefono</label>
+                        </div>
+                        {touched.telefono && errors.telefono && <div className='error last'>{errors.telefono} </div>}
+                        <input type="submit" value='Continuar' className='boton'/>
+                    </form>
+                    )}
+                </Formik>
+            </div>
         </div>
+    </>
   )
 }
 
