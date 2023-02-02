@@ -10,7 +10,7 @@ const ItemListContainer = () => {
 
     useEffect(() => {
         const getAllZapas = async () => {
-            const response = await axios.get('http://localhost:4500/api/v1/zapatillas/')
+            const response = await axios.get('https://snk-api.vercel.app/api/v1/zapatillas')
             setZapas(response.data.data)
         }
 

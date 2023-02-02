@@ -106,6 +106,9 @@
 .brand:hover{
     color: black;
 }
+.contenedorGrande img {
+    width: 60px;
+}
 
 @media (max-width: 870px) {
     .contenedorChico{

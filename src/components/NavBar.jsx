@@ -59,7 +59,7 @@ const NavBar = () => {
                             <FaIcons.FaBars onClick={showSidebar} className='barritas'/>                     
                     </div>                   
                     <Link to="/" className='brand'>  
-                        the Sneaker Store
+                        <img src="/tss2.png" alt="assa"/>
                     </Link>
                 </div>
                 <div className='d-flex contenedorGrande'>

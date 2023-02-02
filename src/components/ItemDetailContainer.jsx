@@ -11,7 +11,7 @@ const ItemDetailContainer = () => {
 
     useEffect(() => {
         const getAllZapasAndFilter = async () => {
-            const response = await axios.get('http://localhost:4500/api/v1/zapatillas/')
+            const response = await axios.get('https://snk-api.vercel.app/api/v1/zapatillas')
             const zapatillas = response.data.data
             const zapa = zapatillas.find((zapa)=> zapa.id === Number(id))
             setZapatilla(zapa)

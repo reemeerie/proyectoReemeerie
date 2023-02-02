@@ -6,7 +6,7 @@ import { CartContext } from '../context/CartContext'
 import Swal from 'sweetalert2'
 import { Formik } from 'formik'
 
-const baseUrl = 'http://localhost:4500/api/v1/login'
+const baseUrl = 'https://snk-api.vercel.app/api/v1/login'
 
 const Login = () => {
     const [user, setUser] = useState('')

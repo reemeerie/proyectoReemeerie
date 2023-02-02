@@ -6,7 +6,7 @@ import { Formik } from 'formik'
 
 const Signup = () => {
   const navigate = useNavigate()
-  const baseUrl = 'http://localhost:4500/api/v1/users'
+  const baseUrl = 'https://snk-api.vercel.app/api/v1/users'
   
   return (
     <div className='loginContainer'>

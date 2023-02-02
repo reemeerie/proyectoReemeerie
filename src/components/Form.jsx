@@ -10,7 +10,7 @@ import { Formik } from 'formik'
 
 const Form = () => {
     const navigate = useNavigate()
-    const baseUrl = 'http://localhost:4500/api/v1/orders'
+    const baseUrl = 'https://snk-api.vercel.app/api/v1/orders'
     const [user, setUser] = useState('')
     const { total, itemsCarrito, clearCarro } = useContext(CartContext)
 
